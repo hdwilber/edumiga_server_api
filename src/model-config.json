@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "sources": [
+      "./models"
+    ],
+    "mixins": [
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Account": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "AccountIdentity": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "AccountCredential": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "AccountAccessToken": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Container": {
+    "dataSource": "storage_container",
+    "public": true 
+  },
+  "MediaFile": {
+    "dataSource": "mongodb",
+    "public": true
+  }
+}

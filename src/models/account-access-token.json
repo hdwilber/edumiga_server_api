@@ -1,0 +1,19 @@
+{
+  "name": "AccountAccessToken",
+  "base": "AccessToken",
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "idName": "id",
+      "polymorphic": {
+        "idType": "string",
+        "foreignKey": "accountId",
+        "discriminator": "principalType"
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,19 @@
+{
+  "name": "AccountIdentity",
+  "base": "UserIdentity",
+  "properties": {
+    "created": "Date",
+    "updated": "Date",
+    "displayName": "string"
+  },
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "accountId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

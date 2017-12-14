@@ -1,0 +1,56 @@
+{
+  "name": "Account",
+  "base": "User",
+  "inheritAcls": false,
+  "properties": {
+    "verificationToken": "string",
+    "verifiedEmail": "boolean",
+    "created": "Date",
+    "updated": "Date"
+  },
+  "relations": {
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccountAccessToken",
+      "polymorphic": {
+        "foreignKey": "accountId",
+        "discriminator": "principalType"
+      },
+      "options": {
+        "disableInclude": true
+      }
+    },
+    "identities": {
+      "type": "hasMany",
+      "model": "AccountIdentity",
+      "foreignKey": "accountId"
+    },
+    "credentials": {
+      "type": "hasMany",
+      "model": "AccountCredential",
+      "foreignKey": "accountId"
+    }
+  },
+  "validations": [],
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    }
+  ],
+  "methods": [
+  ]
+}
