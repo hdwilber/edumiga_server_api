@@ -1,5 +1,5 @@
 {
-  "name": "Record",
+  "name": "Subject",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,12 +9,20 @@
     "name": {
       "type": "string"
     },
+    "code": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     },
-    "published": {
-      "type": "boolean",
-      "default": false
+    "duration": {
+      "type": "number"
+    },
+    "durationUnit": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
     },
     "created": {
       "type": "date",
@@ -27,10 +35,10 @@
   },
   "validations": [],
   "relations": {
-    "explorer": {
+    "opportunity": {
       "type": "belongsTo",
-      "model": "Explorer",
-      "foreignKey": "explorerId"
+      "model": "Opportunity",
+      "foreignKey": "opportunityId"
     },
     "media": {
       "type": "hasMany",

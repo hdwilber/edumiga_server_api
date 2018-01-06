@@ -1,0 +1,88 @@
+{
+  "name": "Opportunity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "type": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date",
+      "required": true
+    },
+    "updated": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "accountId"
+    },
+    "subjects": {
+      "type": "hasMany",
+      "model": "Subject",
+      "foreignKey": "institutionId"
+    },
+    "institution": {
+      "type": "hasMany",
+      "model": "Institution",
+      "foreignKey": "institutionId"
+    },
+    "media": {
+      "type": "hasMany",
+      "model": "MediaFile",
+      "polymorphic": {
+        "selector": "mediable"
+       } 
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "uploadMedia"
+    }
+  ],
+  "methods": {}
+}

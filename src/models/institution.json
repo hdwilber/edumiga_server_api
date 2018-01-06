@@ -1,0 +1,87 @@
+{
+  "name": "Institution",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "locations": [{
+      "type": "GeoPoint"
+    }],
+    "created": {
+      "type": "date",
+      "required": true
+    },
+    "updated": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": "accountId"
+    },
+    "locations": {
+      "type": "hasMany",
+      "model": "Location",
+      "foreignKey": "institutionId"
+    },
+    "mainLogo": {
+      "type": "hasOne",
+      "model": "MediaFile",
+      "polymorphic": {
+        "selector": "mediable"
+      }
+    },
+    "media": {
+      "type": "hasMany",
+      "model": "MediaFile",
+      "polymorphic": {
+        "selector": "mediable"
+       } 
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "uploadMedia"
+    }
+  ],
+  "methods": {}
+}

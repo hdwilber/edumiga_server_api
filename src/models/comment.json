@@ -1,0 +1,39 @@
+{
+  "name": "Comment",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "created": {
+      "type": "Date"
+    },
+    "updated": {
+      "tpye": "Date"
+    },
+    "message": {
+      "type": "GeoPoint"
+    ,
+  ,
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "foreignKey": "accountId",
+      "model": "Account"
+    },
+    "children": {
+      "type": "hasMany",
+      "foreignKey": "parentId",
+      "model": "Message"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ]
+}
