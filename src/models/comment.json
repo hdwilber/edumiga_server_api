@@ -14,8 +14,8 @@
     },
     "message": {
       "type": "GeoPoint"
-    ,
-  ,
+    }
+  },
   "relations": {
     "account": {
       "type": "belongsTo",
