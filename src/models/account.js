@@ -1,4 +1,4 @@
-import Mailer from '../lib/mail'
+import Mailer from '../lib/mailer'
 import crypto from 'crypto'
 
 export default function (Account) {
@@ -28,12 +28,11 @@ export default function (Account) {
   })
 
   Account.observe ('after save', (context, next) => {
-    next()
     if (context.isNewInstance) {
       Mailer.send({
         recipientEmail: context.instance.email,
         token: context.instance.verificationToken,
-        verificationUrl: `http:\/\/localhost:3001/api/Accounts/confirm?uid=${context.instance.id}&token=${context.instance.verificationToken}`
+        verificationUrl: `http:\/\/localhost:3001/api/accounts/confirm?uid=${context.instance.id}&token=${context.instance.verificationToken}`
       })
       .then (res => {
         next()

@@ -18,6 +18,24 @@ export default function (Institution) {
     next()
   })
 
+  Institution.beforeRemote('create', (context, instance, next) => {
+    const { accessToken } = context.req
+    Institution.findOne({ 
+      accountId: accessToken.accountId, 
+      draft: true
+    }, (error, inst) => {
+      if (!error) {
+        if (inst) {
+          context.res.json(inst)
+        } else {
+          next()
+        }
+      } else {
+        next(new Error('Something went wrong'))
+      }
+    })
+  })
+
   Institution.remoteMethod ('uploadMedia', {
     "description": "Uploads media files for a Institution",
     accepts: [

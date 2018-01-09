@@ -12,9 +12,22 @@
     "description": {
       "type": "string"
     },
+    "type": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
     "locations": [{
       "type": "GeoPoint"
     }],
+    "levels": [{
+      "type": "string"
+    }],
+    "draft": {
+      "type": "boolean",
+      "default": true
+    },
     "created": {
       "type": "date",
       "required": true
@@ -55,7 +68,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW",
+      "permission": "DENY",
       "property": "*"
     },
     {
@@ -74,7 +87,7 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "findById"
+      "property": "*"
     },
     {
       "principalType": "ROLE",
