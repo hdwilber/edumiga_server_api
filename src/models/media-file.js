@@ -37,7 +37,7 @@ export default function (MediaFile) {
         format: data.format,
         mediableId: data.mediableId,
         mediableType: data.mediableType,
-        explorerId: data.explorerId,
+        accountId: data.accountId,
         container: data.folder,
         lat: (data.metadata.lat) ? data.metadata.lat: -1,
         lng: (data.metadata.lng) ? data.metadata.lng: -1,
@@ -115,7 +115,7 @@ export default function (MediaFile) {
               type: file.type,
               mediableType: data.mediableType,
               mediableId: data.mediableId,
-              explorerId: data.explorerId
+              accountId: data.accountId,
             })
             .then (res => {
               resolve(res)
@@ -146,7 +146,7 @@ export default function (MediaFile) {
                 file: f,
                 mediableId: options.mediableId,
                 mediableType: options.mediableType,
-                explorerId: context.req.accessToken.explorerId.toString()
+                accountId: context.req.accessToken.accountId.toString()
               })
             })
             Promise.all (filesReading)
@@ -168,8 +168,10 @@ export default function (MediaFile) {
   MediaFile.upload = (context, options, cb) => {
     const Container = MediaFile.app.models.Container;
     const { accessToken } = context.req
-    const folder = `${LOCAL_STORAGE_CONTAINER_USER}${accessToken.explorerId}`
+    const folder = `${LOCAL_STORAGE_CONTAINER_USER}${accessToken.accountId}`
     
+    console.log(context.req)
+
     context.req.params.container = folder;
     options.containerPath = folder;
 

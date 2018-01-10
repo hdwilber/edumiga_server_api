@@ -49,12 +49,10 @@
       "model": "Location",
       "foreignKey": "institutionId"
     },
-    "mainLogo": {
-      "type": "hasOne",
+    "logo": {
+      "type": "belongsTo",
       "model": "MediaFile",
-      "polymorphic": {
-        "selector": "mediable"
-      }
+      "foreignKey": "logoId"
     },
     "media": {
       "type": "hasMany",
