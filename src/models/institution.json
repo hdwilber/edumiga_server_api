@@ -54,6 +54,11 @@
       "model": "MediaFile",
       "foreignKey": "logoId"
     },
+    "opportunities": {
+      "type": "hasMany",
+      "model": "Opportunity",
+      "foreignKey": "institutionId"
+    },
     "media": {
       "type": "hasMany",
       "model": "MediaFile",

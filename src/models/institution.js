@@ -23,7 +23,7 @@ export default function (Institution) {
     Institution.findOne({where:{ 
       accountId: accessToken.accountId, 
       draft: true
-    }, include: ['logo', 'media']}, (error, inst) => {
+    }, include: ['logo', 'media', 'opportunities']}, (error, inst) => {
       if (!error) {
         if (inst) {
           context.res.json(inst)
