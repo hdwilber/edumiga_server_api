@@ -40,7 +40,7 @@
       "foreignKey": "institutionId"
     },
     "institution": {
-      "type": "hasMany",
+      "type": "belongsTo",
       "model": "Institution",
       "foreignKey": "institutionId"
     },

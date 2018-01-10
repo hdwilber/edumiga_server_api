@@ -18,9 +18,9 @@
     "address": {
       "type": "string"
     },
-    "locations": [{
+    "location": {
       "type": "GeoPoint"
-    }],
+    },
     "levels": [{
       "type": "string"
     }],
