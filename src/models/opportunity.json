@@ -19,6 +19,9 @@
     "type": {
       "type": "string"
     },
+    "draft": {
+      "type": "string"
+    },
     "created": {
       "type": "date",
       "required": true
