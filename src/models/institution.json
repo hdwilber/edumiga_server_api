@@ -1,5 +1,5 @@
 {
-  "name": "Record",
+  "name": "Institution",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -12,9 +12,21 @@
     "description": {
       "type": "string"
     },
-    "published": {
+    "type": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "location": {
+      "type": "GeoPoint"
+    },
+    "levels": [{
+      "type": "string"
+    }],
+    "draft": {
       "type": "boolean",
-      "default": false
+      "default": true
     },
     "created": {
       "type": "date",
@@ -27,10 +39,25 @@
   },
   "validations": [],
   "relations": {
-    "explorer": {
+    "account": {
       "type": "belongsTo",
-      "model": "Explorer",
-      "foreignKey": "explorerId"
+      "model": "Account",
+      "foreignKey": "accountId"
+    },
+    "locations": {
+      "type": "hasMany",
+      "model": "Location",
+      "foreignKey": "institutionId"
+    },
+    "logo": {
+      "type": "belongsTo",
+      "model": "MediaFile",
+      "foreignKey": "logoId"
+    },
+    "opportunities": {
+      "type": "hasMany",
+      "model": "Opportunity",
+      "foreignKey": "institutionId"
     },
     "media": {
       "type": "hasMany",
@@ -44,7 +71,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW",
+      "permission": "DENY",
       "property": "*"
     },
     {
@@ -63,7 +90,7 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "findById"
+      "property": "*"
     },
     {
       "principalType": "ROLE",

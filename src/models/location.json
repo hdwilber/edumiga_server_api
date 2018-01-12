@@ -1,0 +1,34 @@
+{
+  "name": "Location",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "point": {
+      "type": "GeoPoint"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "relations": {
+    "institutions": {
+      "type": "belongsTo",
+      "foreignKey": "institutionId",
+      "model": "Institution"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ]
+}

@@ -53,5 +53,25 @@
   "MediaFile": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Institution": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Location": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Opportunity": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Subject": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Comment": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

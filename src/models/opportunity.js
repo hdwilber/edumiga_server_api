@@ -1,16 +1,16 @@
-export default function (Record) {
-  Record.beforeRemote ('**', (context, instance, next) => {
+export default function (Opportunity) {
+  Opportunity.beforeRemote ('**', (context, instance, next) => {
     console.log(context.methodString)
     next()
   })
 
-  Record.observe ('before save', (context, next) => {
+  Opportunity.observe ('before save', (context, next) => {
     const now = Date.now();
     if (context.isNewInstance) {
       const { accessToken } = context.options
       context.instance.created = now
       context.instance.updated = now
-      context.instance.explorerId = accessToken.explorerId
+      context.instance.accountId = accessToken.accountId
     } else {
       delete context.data.id
       context.data.updated = now
@@ -18,8 +18,8 @@ export default function (Record) {
     next()
   })
 
-  Record.remoteMethod ('uploadMedia', {
-    "description": "Uploads media files for a Record",
+  Opportunity.remoteMethod ('uploadMedia', {
+    "description": "Uploads media files for a Opportunity",
     accepts: [
       { arg: "id", type: "string", required: true},
       { arg: 'context', type: "object", http: {source:"context"} },
@@ -31,11 +31,11 @@ export default function (Record) {
     http: {path: '/:id/uploadMedia',verb: "post"}
   });
 
-  Record.uploadMedia = function (id, context, options, cb) {
-    Record.exists(id, function (error, exists) {
+  Opportunity.uploadMedia = function (id, context, options, cb) {
+    Opportunity.exists(id, function (error, exists) {
       if (!error && exists) {
-        var MediaFile = Record.app.models.MediaFile;
-        MediaFile.upload(context, {mediableId: id, mediableType: 'Record'}, function (error, resFile) {
+        var MediaFile = Opportunity.app.models.MediaFile;
+        MediaFile.upload(context, {mediableId: id, mediableType: 'Opportunity'}, function (error, resFile) {
           if (!error) {
             cb(null, resFile);
           } else {

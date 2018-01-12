@@ -4,7 +4,9 @@
   "properties": {
     "created": "Date",
     "updated": "Date",
-    "displayName": "string"
+    "displayName": "string",
+    "firstName": "string",
+    "lastName": "string"
   },
   "validations": [],
   "relations": {
