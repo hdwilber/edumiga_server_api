@@ -47,4 +47,42 @@ export default function (Opportunity) {
       }
     })
   };
+
+  Opportunity.remoteMethod('uploadLogo', {
+    "description": "Uploads a single media file as logo for a Opportunity",
+    accepts: [
+      { arg: "id", type: "string", required: true},
+      { arg: 'context', type: "object", http: {source:"context"} },
+      { arg: 'options', type: "object", http: {source:"query"} }
+    ],
+    returns: {
+      arg: "MediaFile", type: "object", root: true
+    },
+    http: {path: '/:id/uploadLogo',verb: "post"}
+  });
+
+  Opportunity.uploadLogo = function (id, context, options, cb) {
+    Opportunity.findById(id, (error, opportunity) => {
+      if (!error && opportunity) {
+        var MediaFile = Opportunity.app.models.MediaFile;
+        MediaFile.upload(context, {mediableId: id, mediableType: 'Opportunity'}, function (error, resFile) {
+          if (!error && resFile) {
+            opportunity.updateAttributes({
+              logoId: resFile[0].id,
+            }, (error, instance ) => {
+              if (!error && instance) {
+                cb(null, resFile)
+              } else {
+                console.log(error)
+              }
+            })
+          } else {
+            cb(error);
+          }
+        });
+      } else {
+        cb(error);
+      }
+    })
+  }
 }

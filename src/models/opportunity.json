@@ -38,6 +38,11 @@
       "model": "Account",
       "foreignKey": "accountId"
     },
+    "logo": {
+      "type": "belongsTo",
+      "model": "MediaFile",
+      "foreignKey": "logoId"
+    },
     "subjects": {
       "type": "hasMany",
       "model": "Subject",
