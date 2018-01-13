@@ -19,7 +19,8 @@
       "type": "string"
     },
     "location": {
-      "type": "GeoPoint"
+      "point": "GeoPoint",
+      "zoom": "number"
     },
     "levels": [{
       "type": "string"
