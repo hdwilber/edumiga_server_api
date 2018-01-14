@@ -18,9 +18,19 @@
     "address": {
       "type": "string"
     },
+    "country": "string",
+    "state": "string",
+    "county": "string",
+    "phone": "string",
     "location": {
-      "point": "GeoPoint",
-      "zoom": "number"
+      "point": {
+        "type": "GeoPoint",
+        "default": null
+      },
+      "zoom": {
+        "type": "number",
+        "default": 10
+      }
     },
     "levels": [{
       "type": "string"
@@ -86,6 +96,12 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "findById"
     },
     {
       "principalType": "ROLE",
