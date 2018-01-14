@@ -34,11 +34,17 @@ export default function (Account) {
         token: context.instance.verificationToken,
         verificationUrl: `http:\/\/localhost:3001/api/accounts/confirm?uid=${context.instance.id}&token=${context.instance.verificationToken}`
       })
-      .then (res => {
-        next()
-      })
-      .catch (error => {
-        next(error)
+
+      const Identity = Account.app.models.AccountIdentity
+      Identity.create({
+        accountId: context.instance.id,
+      }, (error, identity) => {
+        if (!error && identity) {
+          next()
+        }  else {
+          next(error)
+        }
+
       })
     }
   })

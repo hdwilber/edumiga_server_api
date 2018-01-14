@@ -5,8 +5,23 @@
     "created": "Date",
     "updated": "Date",
     "displayName": "string",
+    "title": "string",
     "firstName": "string",
-    "lastName": "string"
+    "lastName": "string",
+    "birthDate": "Date",
+    "occupation": "string",
+
+    "location": {
+      "point": "GeoPoint",
+      "zoom": "number"
+    },
+    "country": "string",
+    "state": "string",
+    "county": "string",
+    "address": "string",
+
+    "phone": "string",
+    "interests": ["string"]
   },
   "validations": [],
   "relations": {
@@ -14,6 +29,11 @@
       "type": "belongsTo",
       "model": "Account",
       "foreignKey": "accountId"
+    },
+    "photo": {
+      "type": "belongsTo",
+      "model": "MediaFile",
+      "foreignKey": "photoId"
     }
   },
   "acls": [],

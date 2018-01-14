@@ -25,6 +25,7 @@
       "model": "AccountIdentity",
       "foreignKey": "accountId"
     },
+
     "credentials": {
       "type": "hasMany",
       "model": "AccountCredential",
