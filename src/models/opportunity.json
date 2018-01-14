@@ -16,6 +16,13 @@
       "type": "number",
       "default": null
     },
+    "regime": {
+      "type": "string",
+      "default": "yearly"
+    },
+    "startedFrom": {
+      "type": "Date"
+    },
     "type": {
       "type": "string"
     },
