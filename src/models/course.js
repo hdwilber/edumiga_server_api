@@ -1,10 +1,10 @@
-export default function (Subject) {
-  Subject.beforeRemote ('**', (context, instance, next) => {
+export default function (Course) {
+  Course.beforeRemote ('**', (context, instance, next) => {
     console.log(context.methodString)
     next()
   })
 
-  Subject.observe ('before save', (context, next) => {
+  Course.observe ('before save', (context, next) => {
     const now = Date.now();
     if (context.isNewInstance) {
       const { accessToken } = context.options
