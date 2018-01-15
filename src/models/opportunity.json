@@ -50,10 +50,10 @@
       "model": "MediaFile",
       "foreignKey": "logoId"
     },
-    "subjects": {
+    "courses": {
       "type": "hasMany",
-      "model": "Subject",
-      "foreignKey": "institutionId"
+      "model": "Course",
+      "foreignKey": "opportunityId"
     },
     "institution": {
       "type": "belongsTo",

@@ -1,5 +1,5 @@
 {
-  "name": "Subject",
+  "name": "Course",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -20,6 +20,9 @@
     },
     "durationUnit": {
       "type": "string"
+    },
+    "mandatory": {
+      "type": "boolean"
     },
     "type": {
       "type": "string"
@@ -46,6 +49,10 @@
       "polymorphic": {
         "selector": "mediable"
        } 
+    },
+    "prerequisites": {
+      "type": "hasAndBelongsToMany",
+      "model": "Course"
     }
   },
   "acls": [
