@@ -55,8 +55,10 @@
        } 
     },
     "prerequisites": {
-      "type": "hasAndBelongsToMany",
-      "model": "Course"
+      "type": "hasMany",
+      "model": "Course",
+      "foreignKey": "prerequisiteId",
+      "through": "Prerequisite"
     }
   },
   "acls": [

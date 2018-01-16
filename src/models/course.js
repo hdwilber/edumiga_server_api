@@ -18,4 +18,43 @@ export default function (Course) {
     next()
   })
 
+  function prerequisiteAdd(Prerequisite, courseId, prerequisiteId) {
+    return new Promise((resolve, reject) => {
+      Prerequisite.create({
+        prerequisiteId: courseId, courseId: prerequisiteId,
+      }, (error, pre) => {
+        if (!error) {
+          resolve(pre)
+        } else {
+          reject(error)
+        }
+      })
+    })
+  }
+
+  Course.afterRemote('prototype.patchAttributes', (context, instance, next) => {
+    const Prerequisite = Course.app.models.Prerequisite
+    if (context.args.data) {
+      const { prerequisites } = context.args.data
+      if (prerequisites) {
+        Prerequisite.remove({courseId: instance.id,}, (error) => {
+          if (!error) {
+            console.log(instance)
+            const promises = prerequisites.map(p => prerequisiteAdd(Prerequisite, instance.id, p))
+            Promise.all(promises)
+            .then(prerequisites => {
+              next()
+            })
+            .catch(error => {
+              next(error)
+            })
+          } else {
+            next(error)
+          }
+        })
+      } else {
+        next()
+      }
+    }
+  })
 }

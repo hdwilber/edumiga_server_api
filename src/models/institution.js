@@ -79,7 +79,7 @@ export default function (Institution) {
     accepts: [
       { arg: "id", type: "string", required: true},
       { arg: 'context', type: "object", http: {source:"context"} },
-      { arg: 'options', type: "object", http: {source:"query"} }
+      { arg: 'array', type: "object", http: {source:"body"} }
     ],
     returns: {
       arg: "MediaFile", type: "object", root: true

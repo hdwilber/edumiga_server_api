@@ -1,0 +1,36 @@
+{
+  "name": "Prerequisite",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "created": {
+      "type": "Date"
+    },
+    "updated": {
+      "tpye": "Date"
+    }
+  },
+  "relations": {
+    "course": {
+      "type": "belongsTo",
+      "foreignKey": "prerequisiteId",
+      "model": "Course"
+    },
+    "prerequisite": {
+      "type": "belongsTo",
+      "foreignKey": "courseId",
+      "model": "Course"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ]
+}

@@ -73,5 +73,9 @@
   "Comment": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "Prerequisite": {
+    "dataSource": "mongodb",
+    "public": false
   }
 }
