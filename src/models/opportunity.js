@@ -18,6 +18,30 @@ export default function (Opportunity) {
     next()
   })
 
+  Opportunity.beforeRemote('prototype.__create__courses', (context, instance, next) => {
+    const { accessToken } = context.req
+    const Course = Opportunity.app.models.Course
+
+    if (context.instance) {
+      Course.findOne({where:{ 
+        accountId: accessToken.accountId, 
+        opportunityId: context.instance.id,
+        draft: true
+      }, include: []}, (error, course) => {
+        if (!error) {
+          if (course) {
+            context.res.json(course)
+          } else {
+            next()
+          }
+        } else {
+          next(new Error('Something went wrong'))
+        }
+      })
+    } else {
+      next(new Error('It doesnt exists'))
+    }
+  })
   Opportunity.remoteMethod ('uploadMedia', {
     "description": "Uploads media files for a Opportunity",
     accepts: [

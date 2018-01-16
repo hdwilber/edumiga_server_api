@@ -18,6 +18,10 @@
     "duration": {
       "type": "number"
     },
+    "draft": {
+      "type": "boolean",
+      "default": true
+    },
     "durationUnit": {
       "type": "string"
     },
