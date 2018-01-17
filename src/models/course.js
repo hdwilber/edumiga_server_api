@@ -21,7 +21,7 @@ export default function (Course) {
   function prerequisiteAdd(Prerequisite, courseId, prerequisiteId) {
     return new Promise((resolve, reject) => {
       Prerequisite.create({
-        prerequisiteId: courseId, courseId: prerequisiteId,
+        prerequisiteId: prerequisiteId, courseId: courseId,
       }, (error, pre) => {
         if (!error) {
           resolve(pre)
@@ -32,15 +32,15 @@ export default function (Course) {
     })
   }
 
-  Course.afterRemote('prototype.patchAttributes', (context, instance, next) => {
+  Course.beforeRemote('prototype.patchAttributes', (context, instance, next) => {
     const Prerequisite = Course.app.models.Prerequisite
     if (context.args.data) {
       const { prerequisites } = context.args.data
       if (prerequisites) {
-        Prerequisite.remove({courseId: instance.id,}, (error) => {
+        Prerequisite.remove({courseId: context.instance.id,}, (error) => {
           if (!error) {
             console.log(instance)
-            const promises = prerequisites.map(p => prerequisiteAdd(Prerequisite, instance.id, p))
+            const promises = prerequisites.map(p => prerequisiteAdd(Prerequisite, context.instance.id, p))
             Promise.all(promises)
             .then(prerequisites => {
               next()
@@ -56,5 +56,15 @@ export default function (Course) {
         next()
       }
     }
+  })
+  Course.afterRemote('prototype.patchAttributes', (context, instance, next) => {
+    Course.findById(instance.id, { include: ['prerequisites'] }, (error, course) => {
+      if (!error) {
+        context.result = course
+        next()
+      } else {
+        next(error)
+      }
+    })
   })
 }

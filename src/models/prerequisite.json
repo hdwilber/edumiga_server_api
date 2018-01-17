@@ -14,14 +14,14 @@
     }
   },
   "relations": {
-    "course": {
-      "type": "belongsTo",
-      "foreignKey": "prerequisiteId",
-      "model": "Course"
-    },
     "prerequisite": {
       "type": "belongsTo",
       "foreignKey": "courseId",
+      "model": "Course"
+    },
+    "course": {
+      "type": "belongsTo",
+      "foreignKey": "prerequisiteId",
       "model": "Course"
     }
   },

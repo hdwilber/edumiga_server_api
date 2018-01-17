@@ -57,8 +57,9 @@
     "prerequisites": {
       "type": "hasMany",
       "model": "Course",
-      "foreignKey": "prerequisiteId",
-      "through": "Prerequisite"
+      "foreignKey": "courseId",
+      "through": "Prerequisite",
+      "keyThrough": "prerequisiteId"
     }
   },
   "acls": [
