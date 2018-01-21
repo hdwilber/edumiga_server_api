@@ -1,4 +1,5 @@
 import { Types, Levels } from '../data/institution/constants'
+import { Countries } from '../data/countries'
 
 export default function (Institution) {
   Institution.beforeRemote ('**', (context, instance, next) => {
@@ -109,27 +110,18 @@ export default function (Institution) {
   Institution.remoteMethod('types', {
     description: "Returns constants for types",
     accepts: [
-      { arg: "select", type: "string", required: false },
     ],
     returns: {
-      arg: "Types", type: "array", root: true
+      arg: "Types", type: "object", root: true
     },
-    http: { path: '/types/:select', verb: "get" }
+    http: { path: '/types', verb: "get" }
   })
 
-  Institution.types = function (select, cb) {
-    if (select) {
-      switch(select.trim().toLowerCase()) {
-        case 'level':
-          cb(null, Levels)
-          break
-
-        default:
-          cb(null, Types)
-          break
-      }
-    } else {
-      cb(null, Types)
-    }
+  Institution.types = function (cb) {
+    cb(null, {
+      types: Types,
+      levels: Levels,
+      countries: Countries,
+    })
   }
 }

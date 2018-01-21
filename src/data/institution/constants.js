@@ -6,7 +6,7 @@ export const Types = [
   },
   {
     id: 'private',
-    name: 'Public',
+    name: 'Private',
     description: 'Private and profit institution'
   },
   {

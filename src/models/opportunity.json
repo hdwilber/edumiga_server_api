@@ -27,7 +27,7 @@
       "type": "string"
     },
     "draft": {
-      "type": "string"
+      "type": "boolean"
     },
     "created": {
       "type": "date",
