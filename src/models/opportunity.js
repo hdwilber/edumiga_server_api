@@ -1,3 +1,5 @@
+import { Regimes, Degrees, Attendance, } from '../data/opportunity/constants'
+
 export default function (Opportunity) {
   Opportunity.beforeRemote ('**', (context, instance, next) => {
     console.log(context.methodString)
@@ -108,5 +110,34 @@ export default function (Opportunity) {
         cb(error);
       }
     })
+  }
+
+  Opportunity.remoteMethod('types', {
+    description: "Returns constants for types",
+    accepts: [
+      { arg: "select", type: "string", required: false },
+    ],
+    returns: {
+      arg: "Types", type: "array", root: true
+    },
+    http: { path: '/types/:select', verb: "get" }
+  })
+
+  Opportunity.types = function (select, cb) {
+    if (select) {
+      switch(select.trim().toLowerCase()) {
+        case 'regime':
+          cb(null, Regimes)
+          break
+        case 'attendance':
+          cb(null, Attendance)
+          break
+        default:
+          cb(null, Degrees)
+          break
+      }
+    } else {
+      cb(null, Degrees)
+    }
   }
 }

@@ -32,9 +32,8 @@
         "default": 10
       }
     },
-    "levels": [{
-      "type": "string"
-    }],
+    "categories": [{ "type": "string" }],
+    "levels": [{"type": "string"}],
     "draft": {
       "type": "boolean",
       "default": true
@@ -82,7 +81,7 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY",
+      "permission": "ALLOW",
       "property": "*"
     },
     {
