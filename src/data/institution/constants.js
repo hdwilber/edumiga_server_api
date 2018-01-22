@@ -15,9 +15,9 @@ export const Types = [
     description: 'Private and non profit organization'
   },
   {
-    id: 'unknown',
-    name: 'Unknown',
-    description: 'Unknown institution type'
+    id: 'mixed',
+    name: 'Mixed',
+    description: 'Public Institution with private help'
   }
 ]
 

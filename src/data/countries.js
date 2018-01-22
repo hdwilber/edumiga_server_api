@@ -4,39 +4,39 @@ export const Countries = [
     name: 'Bolivia',
     states: [
       {
-        id: 'LP',
+        id: 'lp',
         name: 'La Paz'
       },
       {
-        id: 'CO',
+        id: 'cb',
         name: 'Cochabamba'
       },
       {
-        id: 'PT',
+        id: 'pt',
         name: 'Potosi',
       },
       {
-        id: 'SC',
+        id: 'sc',
         name: 'Santa Cruz',
       },
       {
-        id: 'TJ',
+        id: 'tj',
         name: 'Tarija',
       },
       {
-        id: 'CH',
+        id: 'ch',
         name: 'Chuquisaca',
       },
       {
-        id: 'PA',
+        id: 'pa',
         name: 'Pando'
       },
       {
-        id: 'BN',
+        id: 'bn',
         name: 'Beni'
       },
       {
-        id: 'OR',
+        id: 'or',
         name: 'Oruro'
       },
     ]

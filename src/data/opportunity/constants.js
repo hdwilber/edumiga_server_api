@@ -20,8 +20,8 @@ export const Regimes = [
     id: 'triannual',
   },
   {
-    name: 'Semiannual',
-    id: 'semiannual',
+    name: 'Semiyearly',
+    id: 'semiyearly',
   },
   {
     name: 'Mixed',
@@ -31,8 +31,12 @@ export const Regimes = [
 
 export const Degrees = [
   {
-    name: 'Technician',
-    id: 'tech',
+    name: 'Upper Technician',
+    id: 'upper-tech',
+  },
+  {
+    name: 'Mid Technician',
+    id: 'mid-tech',
   },
   {
     name: 'Bachelor',

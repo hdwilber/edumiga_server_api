@@ -6,6 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
+    "prename": { "type": "string" },
     "name": {
       "type": "string"
     },
@@ -20,6 +21,7 @@
     },
     "country": "string",
     "state": "string",
+    "province": "string",
     "county": "string",
     "phone": "string",
     "location": {
