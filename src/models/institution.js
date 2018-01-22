@@ -1,3 +1,6 @@
+import { Types, Levels } from '../data/institution/constants'
+import { Countries } from '../data/countries'
+
 export default function (Institution) {
   Institution.beforeRemote ('**', (context, instance, next) => {
     console.log(context.methodString)
@@ -75,7 +78,7 @@ export default function (Institution) {
   }
 
   Institution.remoteMethod ('uploadMedia', {
-    "description": "Uploads media files for a Institution",
+    description: "Uploads media files for a Institution",
     accepts: [
       { arg: "id", type: "string", required: true},
       { arg: 'context', type: "object", http: {source:"context"} },
@@ -102,5 +105,23 @@ export default function (Institution) {
         cb(error);
       }
     })
-  };
+  }
+
+  Institution.remoteMethod('types', {
+    description: "Returns constants for types",
+    accepts: [
+    ],
+    returns: {
+      arg: "Types", type: "object", root: true
+    },
+    http: { path: '/types', verb: "get" }
+  })
+
+  Institution.types = function (cb) {
+    cb(null, {
+      types: Types,
+      levels: Levels,
+      countries: Countries,
+    })
+  }
 }

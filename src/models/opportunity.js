@@ -1,3 +1,5 @@
+import { Regimes, Degrees, Attendances, } from '../data/opportunity/constants'
+
 export default function (Opportunity) {
   Opportunity.beforeRemote ('**', (context, instance, next) => {
     console.log(context.methodString)
@@ -107,6 +109,24 @@ export default function (Opportunity) {
       } else {
         cb(error);
       }
+    })
+  }
+
+  Opportunity.remoteMethod('types', {
+    description: "Returns constants for types",
+    accepts: [
+    ],
+    returns: {
+      arg: "Types", type: "array", root: true
+    },
+    http: { path: '/types', verb: "get" }
+  })
+
+  Opportunity.types = function (cb) {
+    cb(null, {
+      regimes: Regimes,
+      degrees: Degrees,
+      attendances: Attendances,
     })
   }
 }
