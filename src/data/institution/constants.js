@@ -105,3 +105,17 @@ export const Levels = [
   }
 ]
 
+export const AdminLevels = [
+  {
+    id: 'institution',
+    name: 'Institution',
+  },
+  {
+    id: 'faculty',
+    name: 'Faculty',
+  },
+  {
+    id: 'department',
+    name: 'Department',
+  }
+]

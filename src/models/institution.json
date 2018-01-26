@@ -24,6 +24,10 @@
     "province": "string",
     "county": "string",
     "phone": "string",
+    "adminType": {
+      "type": "string",
+      "default": "main"
+    },
     "location": {
       "point": {
         "type": "GeoPoint",
@@ -61,6 +65,17 @@
       "model": "Location",
       "foreignKey": "institutionId"
     },
+    "main": {
+      "type": "belongsTo",
+      "model": "Institution",
+      "foreignKey": "parentId"
+    },
+    "children": {
+      "type": "hasMany",
+      "model": "Institution",
+      "foreignKey": "parentId"
+    },
+
     "logo": {
       "type": "belongsTo",
       "model": "MediaFile",
