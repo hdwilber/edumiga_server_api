@@ -1,0 +1,34 @@
+"nro","levels","country","state","county","province","type","prename","name","description","address","phone"
+1,"higher","bo","bn","Riberalta","Vaca Diez","public","Instituto Tecnologico Superior de la Amazonia","ITSA","909/89 DEL 29/03/1989","AV. FRAY BERNARDINO OCHOA esq. Dr. ANTONIO VACA DIEZ",
+2,"higher","bo","bn","Trinidad","Cercado","mixed","Instituto Tecnologico","Jose Castillo Fe y Alegria","261/05 DEL 16/08/2005","AV. GANADERA",
+3,"higher","bo","bn","Guayaramerin","Vaca Diez","public","Instituto Tecnico","INCOS Guayaramerin","429/1991 DEL 18/04/1991","CALLE VILLA BELLA ESQ. 22 DE JULIO",
+4,"higher","bo","bn","Trinidad","Cercado","public","Instituto Tecnico","INCOS Beni","R.M. 369/84 DEL 09/05/1984","CALLE NICOLÁS SUÁREZ ESQ. ANTONIO VACA DIEZ",4620027
+5,"higher","bo","bn","Santa Ana de Yacuma","Yacuma","public","Instituto Tecnico","INCOS Santa Ana",,"C./ SANTA CRUZ ESQ. OVIDIO CUÉLLAR",
+6,"higher","bo","bn","San Ignacio de Moxos","Moxos","mixed","Instituto Tecnologico","Kateri Tekawitha",,"TIPNIS, SOBRE RÍO ISIBORO ENTRE RÍOS SÉCURE E ICHOA",
+7,"higher","bo","ch","Sucre","Oropeza","mixed","Instituto Tecnico","Aurora Rossells de Fe y Alegria","R.M. 9600 DEL 30/09/1944","CALLE AZURDUY N° 57","4-6461522"
+8,"higher","bo","ch","San Pablo de Huacareta","Hernando Siles","public","Instituto Tecnologico Superior Agropecuario Industrial Huacareta","ITSA-H","R.M. 802/2015 DEL 26/10/2015","CALLE BOLÍVAR S/N (SALIDA A MONTEAGUDO)",73467247
+9,"higher","bo","ch","Sucre",,"public","Instituto Tecnico Superior de Educacion Comercial","ITSEC Sucre","R.M.826/1986 DEL 09/07/1985","CALLE M. MELEÁN ESQ J. L. MARTÍNEZ No 151",6444156
+10,"higher","bo","ch","Tarabuco",,"public","Instituto Tecnologico Superior","Carrillo Calizaya","R.M. 672/2009","CALLE ESTUDIANTES No 30",73430864
+11,"higher","bo","ch","Camargo","Nor Cinti","public","Instituto Tecnologico Superior","Los Cintis","R.M. 674/2009 DEL 02/10/2009","CALLE COBIJA S/N (Frente al Hospital “San Juan de Dios”)",72976957
+12,"higher","bo","ch","Montegudo","Hernando Siles","public","Instituto Tecnologico Superior","Monteagudo","R.M. 673/2009 DEL 02/10/2009","CALLE SUCRE N° 707 (EX DIRECCIÓN DISTRITAL)",76118239
+13,"higher","bo","ch","Tomina","Tomina","public","Instituto Tecnologico Superior","Jose Marti","R.M. 671/2009","CALLE MONTEAGUDO ESQUINA SERRANO",71828999
+14,"higher","bo","cb","Colcapirhua","Quillacollo","public","Instituto Tecnico","Maria Cristina","R.M. 404/2000","ZONA SANTA ROSA",4269510
+15,"higher","bo","cb","Cochabamba","Cercado","public","Tecnologico Industrial Comercial","Puerto Mejillones","R.M. 260/1981","CALLE ZENOBIO GALLARDO No 3454 ENTRE JOSÉ MÉRICA Y PASAJE 6 DE JUNIO",4490296
+16,"higher","bo","cb","Sacaba","Chapare","public","Instituto Tecnico","Sacaba – ITSA","R.M. 088/88","AV. CIRCUNVALACIÓN SUR No 1244 E ISMAEL CÉSPEDES – SACABA",4704264
+17,"higher","bo","cb","Chimore","Chapare","public","Tecnologico Agropecuario","Canada – Chimore","R.M. 088/88","SENDA TRES",4704264
+18,"higher","bo","cb","Quillacollo","Chapare","mixed","Instituto Tecnologico","Amor Misericordioso","R.A. 184/2004","LOCALIDAD MARQUINA",4365855
+19,"higher","bo","cb","Colcapirhua","Quillacollo","public","Instituto Tecnologico Boliviano Canadiense","El Paso","R.M.260/1981, R.E. 002/87","AV. ELÍAS MENESES CAMINO A LA LOCALIDAD EL PASO",4319934
+20,"higher","bo","cb","Tarata","Esteban Arce","public","Instituto Agropecuario","Tarata","RES. EJECUTIVA 005/95",,4578949
+21,"higher","bo","cb","Villa Tunari","Chapare","mixed","Instituto Tecnologico","Eterazama","R.M. 493/08","ETERAZAMA",4136092
+22,"higher","bo","cb","Sacaba","Chapare","public","Instituto Tecnologico","Berto Nicoli","R.M. 271/2011","ZONA CHIMBOCO",4704264
+23,"higher","bo","cb","Tiquipaya","Quillacollo","mixed","Instituto Tecnologico","Padre Antonio Berta","R.M. 091/2012","ZONA CRUCE TAQUINA – CIUDAD DE LOS NINOS",4287844
+24,"higher","bo","cb","Cochabamba","Cercado","mixed","Instituto Tecnico","Nuestra Senora del Pilar","R.M. 055/2001","TICTI NORTE – PLAZA SR. DE MAYO CALLE TARHUI",4476396
+25,"higher","bo","cb","Cochabamba","Cercado","public","Instituto Tecnico Nacional de Comercio","Federico Alvarez Plata – Diurno","R.M. 619/1954, R.M.1055/1964","Av. Ayacucho Esq. Jordán y Jordán S-0415",4258041
+26,"higher","bo","cb","Cochabamba","Cercado","public","Instituto Tecnico Nacional de Comercio","Federico Alvarez Plata – Nocturno","R.M. 619/1954, R.M.1055/1964","Av. Ayacucho Esq. Jordán y Jordán S-0415",4257971
+27,"higher","bo","cb","Quillacollo",,"public","Instituto Tecnico Nacional  de Comercio","Nro. 3",,,
+28,"higher","bo","cb","Aiquile",,"public","Instituto Tecnologico Superior Agroindustrial","Aiquile TECSA",,,
+29,"higher","bo","cb","Cochabamba",,"public","Escuela de Administracion de Empresas","ESAE",,,
+30,"higher","bo","cb","Quillacollo",,"mixed","Instituto Tecnico","Maria Inmaculada",,,
+31,"higher","bo","cb","Mizque",,"public","Instituto Tecnologico","Avelino Sinani de Mizque",,,
+32,"higher","bo","cb","Villa Tunari",,"public","Instituto Tecnologico","Presidente Evo Morales Ayma",,,
+33,"higher","bo","cb","Villa Tunari",,"public","Instituto Tecnologico","Comandante Hugo Chavez Frias",,,
