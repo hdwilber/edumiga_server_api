@@ -4,6 +4,7 @@ var db = conn.getDB("edumiga");
 db.Institution.find().forEach(function (inst) {
   if (inst.levels)
     inst.levels = inst.levels.split(',');
+    inst.adminLevel = 'main'
   db.Institution.save(inst)
 })
 

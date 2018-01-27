@@ -107,7 +107,7 @@ export const Levels = [
 
 export const AdminLevels = [
   {
-    id: 'institution',
+    id: 'main',
     name: 'Institution',
   },
   {

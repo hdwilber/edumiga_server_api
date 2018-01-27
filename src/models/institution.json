@@ -24,7 +24,7 @@
     "province": "string",
     "county": "string",
     "phone": "string",
-    "adminType": {
+    "adminLevel": {
       "type": "string",
       "default": "main"
     },
@@ -65,12 +65,12 @@
       "model": "Location",
       "foreignKey": "institutionId"
     },
-    "main": {
+    "head": {
       "type": "belongsTo",
       "model": "Institution",
       "foreignKey": "parentId"
     },
-    "children": {
+    "dependencies": {
       "type": "hasMany",
       "model": "Institution",
       "foreignKey": "parentId"

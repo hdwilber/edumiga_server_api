@@ -1,4 +1,4 @@
-import { Types, Levels } from '../data/institution/constants'
+import { Types, Levels, AdminLevels } from '../data/institution/constants'
 import { Countries } from '../data/countries'
 
 export default function (Institution) {
@@ -121,6 +121,7 @@ export default function (Institution) {
     cb(null, {
       types: Types,
       levels: Levels,
+      adminLevels: AdminLevels,
       countries: Countries,
     })
   }

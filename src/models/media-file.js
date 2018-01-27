@@ -127,7 +127,7 @@ export default function (MediaFile) {
           })
         } else {
           // Error GM
-          reject (new Error('Error in GM'))
+          reject (error)
         }
       });
     })
