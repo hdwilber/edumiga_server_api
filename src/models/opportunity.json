@@ -30,12 +30,10 @@
       "type": "boolean"
     },
     "created": {
-      "type": "date",
-      "required": true
+      "type": "date"
     },
     "updated": {
-      "type": "date",
-      "required": true
+      "type": "date"
     }
   },
   "validations": [],

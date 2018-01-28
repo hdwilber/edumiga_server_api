@@ -1,81 +1,89 @@
 export const Regimes = [
   {
-    id: 'yearly',
-    name: 'Yearly',
+    value: 'yearly',
+    text: 'Yearly',
   },
   {
-    name: 'Monthly',
-    id: 'monthly',
+    text: 'Monthly',
+    value: 'monthly',
   },
   {
-    name: 'Bimonthly',
-    id: 'bimonthly',
+    text: 'Bimonthly',
+    value: 'bimonthly',
   },
   {
-    name: 'Quarterly',
-    id: 'quarterly',
+    text: 'Quarterly',
+    value: 'quarterly',
   },
   {
-    name: 'Triannual',
-    id: 'triannual',
+    text: 'Triannual',
+    value: 'triannual',
   },
   {
-    name: 'Semiyearly',
-    id: 'semiyearly',
+    text: 'Semiyearly',
+    value: 'semiyearly',
   },
   {
-    name: 'Mixed',
-    id: 'mixed',
+    text: 'Modular',
+    value: 'modular',
+  },
+  {
+    text: 'Mixed',
+    value: 'mixed',
   },
 ]
 
 export const Degrees = [
   {
-    name: 'Upper Technician',
-    id: 'upper-tech',
+    text: 'Training',
+    value: 'training',
   },
   {
-    name: 'Mid Technician',
-    id: 'mid-tech',
+    text: 'Upper Technician',
+    value: 'upper-tech',
   },
   {
-    name: 'Bachelor',
-    id: 'bachelor',
+    text: 'Mid Technician',
+    value: 'mid-tech',
   },
   {
-    name: 'Master',
-    id: 'master',
+    text: 'Bachelor',
+    value: 'bachelor',
   },
   {
-    name: 'Doctor',
-    id: 'doctor',
+    text: 'Master',
+    value: 'master',
   },
   {
-    name: 'PostDoctor',
-    id: 'postdoc',
+    text: 'Doctor',
+    value: 'doctor',
   },
   {
-    name: 'Specialization',
-    id: 'special',
+    text: 'PostDoctor',
+    value: 'postdoc',
+  },
+  {
+    text: 'Specialization',
+    value: 'special',
   },
 ]
 
 export const Attendances = [
   {
-    name: 'Remote',
-    id: 'remote',
+    text: 'Remote',
+    value: 'remote',
   },
   {
-    name: 'Semi-presential',
-    id: 'semi',
+    text: 'Semi-presential',
+    value: 'semi',
   },
   {
-    name: 'Presential',
-    id: 'presential',
+    text: 'Presential',
+    value: 'presential',
   },
   {
-    name: 'Mixed',
-    id: 'mixed',
+    text: 'Mixed',
+    value: 'mixed',
   }
 
 ]

@@ -1,43 +1,43 @@
 export const Countries = [
   {
-    id: 'bo',
-    name: 'Bolivia',
+    value: 'bo',
+    text: 'Bolivia',
     states: [
       {
-        id: 'lp',
-        name: 'La Paz'
+        value: 'lp',
+        text: 'La Paz'
       },
       {
-        id: 'cb',
-        name: 'Cochabamba'
+        value: 'cb',
+        text: 'Cochabamba'
       },
       {
-        id: 'pt',
-        name: 'Potosi',
+        value: 'pt',
+        text: 'Potosi',
       },
       {
-        id: 'sc',
-        name: 'Santa Cruz',
+        value: 'sc',
+        text: 'Santa Cruz',
       },
       {
-        id: 'tj',
-        name: 'Tarija',
+        value: 'tj',
+        text: 'Tarija',
       },
       {
-        id: 'ch',
-        name: 'Chuquisaca',
+        value: 'ch',
+        text: 'Chuquisaca',
       },
       {
-        id: 'pa',
-        name: 'Pando'
+        value: 'pa',
+        text: 'Pando'
       },
       {
-        id: 'bn',
-        name: 'Beni'
+        value: 'bn',
+        text: 'Beni'
       },
       {
-        id: 'or',
-        name: 'Oruro'
+        value: 'or',
+        text: 'Oruro'
       },
     ]
   }

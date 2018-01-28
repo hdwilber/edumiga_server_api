@@ -1,105 +1,105 @@
 export const Types = [
   {
-    id: 'public',
-    name: 'Public',
+    value: 'public',
+    text: 'Public',
     description: 'Public institution leaded by the government and its related administration.',
   },
   {
-    id: 'private',
-    name: 'Private',
+    value: 'private',
+    text: 'Private',
     description: 'Private and profit institution'
   },
   {
-    id: 'private-np',
-    name: 'Private Non-profit',
+    value: 'private-np',
+    text: 'Private Non-profit',
     description: 'Private and non profit organization'
   },
   {
-    id: 'mixed',
-    name: 'Mixed',
+    value: 'mixed',
+    text: 'Mixed',
     description: 'Public Institution with private help'
   }
 ]
 
 export const Levels = [
   {
-    id: 'early',
-    name: 'Early childhood',
+    value: 'early',
+    text: 'Early childhood',
     categories: [
       {
-        id: 'preschool',
-        name: 'Preschool',
+        value: 'preschool',
+        text: 'Preschool',
       },
       {
-        id: 'kindergarten',
-        name: 'Kindergarten',
+        value: 'kindergarten',
+        text: 'Kindergarten',
         description: '',
       },
       {
-        id: 'nursery',
-        name: 'Nursery',
+        value: 'nursery',
+        text: 'Nursery',
         description: '',
       },
     ]
   },
   {
-    id: 'primary',
-    name: 'Primary',
+    value: 'primary',
+    text: 'Primary',
     categories: [
       {
-        id: 'elementary',
-        name: 'Elementary School',
+        value: 'elementary',
+        text: 'Elementary School',
         description: '',
       },
       {
-        id: 'middle',
-        name: 'Middle School',
+        value: 'mvaluedle',
+        text: 'Mvaluedle School',
         description: '',
       },
       {
-        id: 'comprenhensive',
-        name: 'Comprehensive School',
+        value: 'comprenhensive',
+        text: 'Comprehensive School',
         description: '',
       },
     ]
   },
   {
-    id: 'secondary',
-    name: 'Secondary',
+    value: 'secondary',
+    text: 'Secondary',
     categories: [
       {
-        id: 'secondary',
-        name: 'Secondary School'
+        value: 'secondary',
+        text: 'Secondary School'
       }
     ]
   },
   {
-    id: 'higher',
-    name: 'Higher Education',
+    value: 'higher',
+    text: 'Higher Education',
     categories: [
       {
-        id: 'postdoc',
-        name: 'PostDoc',
+        value: 'postdoc',
+        text: 'PostDoc',
       },
       {
-        id: 'phd',
-        name: 'Philosophical Doctor',
+        value: 'phd',
+        text: 'Philosophical Doctor',
       },
       {
-        id: 'master',
-        name: 'Master of Science'
+        value: 'master',
+        text: 'Master of Science'
       },
       {
-        id: 'bachelor',
-        name: 'Bachelor'
+        value: 'bachelor',
+        text: 'Bachelor'
       },
       {
-        id: 'upper-technician',
-        name: 'Upper Technician'
+        value: 'upper-technician',
+        text: 'Upper Technician'
       },
       {
-        id: 'mid-technician',
-        name: 'Mid Technician'
+        value: 'mvalue-technician',
+        text: 'Mvalue Technician'
       }
     ]
   }
@@ -107,15 +107,15 @@ export const Levels = [
 
 export const AdminLevels = [
   {
-    id: 'main',
-    name: 'Institution',
+    value: 'main',
+    text: 'Institution',
   },
   {
-    id: 'faculty',
-    name: 'Faculty',
+    value: 'faculty',
+    text: 'Faculty',
   },
   {
-    id: 'department',
-    name: 'Department',
+    value: 'department',
+    text: 'Department',
   }
 ]

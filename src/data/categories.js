@@ -1,34 +1,34 @@
 export const Categories = [
   {
-    name: 'Everything and all',
-    id: 'all',
+    text: 'Everything and all',
+    value: 'all',
   },
   {
-    name: 'Art',
-    id: 'art',
+    text: 'Art',
+    value: 'art',
   },
   {
-    name: 'Technology',
-    id: 'technology',
+    text: 'Technology',
+    value: 'technology',
   },
   {
-    name: 'Science',
-    id: 'science',
+    text: 'Science',
+    value: 'science',
   },
   {
-    name: 'Undergraduate',
-    id: 'undergraduate',
+    text: 'Undergraduate',
+    value: 'undergraduate',
   },
   {
-    name: 'Specializations',
-    id: 'specialization',
+    text: 'Specializations',
+    value: 'specialization',
   },
   {
-    name: 'Mastering',
-    id: 'mastering',
+    text: 'Mastering',
+    value: 'mastering',
   },
   {
-    name: 'Highschool',
-    id: 'highschool',
+    text: 'Highschool',
+    value: 'highschool',
   },
 ]
