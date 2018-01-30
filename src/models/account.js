@@ -46,83 +46,61 @@ export default function (Account) {
         }
 
       })
+    } else {
+      next()
     }
   })
 
   Account.confirm = function (uid, token, redirect, next) {
-    console.log(next)
     Account.findById(uid, (error, account ) => {
       if (!error && account) {
         const clearToken = token.trim()
-
         if (account.verificationToken === clearToken) {
           account.verifiedEmail = true
           account.verificationToken = null
           account.save( function (error, newAccount) {
             if (!error) {
-              //context.result = {
-                //extra: 'data'
-              //}
-              next(null, { data:1 })
+              next()
             } else {
-              //context.result = {
-                //extra: 'data',
-                //result: 2,
-              //}
-              //next()
-              next(null, { data:2 })
+              next(error)
             }
           })
         } else {
-          //context.result = {
-            //extra: 'data',
-            //result: 3,
-          //}
-          //next()
-          next(null, { data:3 })
+          next({code: 'INVALID_TOKEN', message: 'Invalid token', statusCode: 404})
         }
       } else {
-        //context.result = {
-          //extra: 'error',
-          //result: 10,
-        //}
-        //next()
-          next(null, { data:4 })
+        next(error)
       }
     })
   }
 
-  Account.afterRemote ('confirm', (context, instance, next) => {
+  Account.resendConfirm = function(context, next) {
     console.log(context)
-    //console.log(context)
-    //console.log(instance)
-    //context.result = {
-      //message: 'Email verified'
-    //}
-    next()
+    const { accessToken } = context.req
+    console.log(context.instance)
+
+    Account.findById(accessToken.accountId, (error, account) => {
+      if (!error && account && account.verificationToken) {
+        Mailer.send({
+          recipientEmail: account.email,
+          token: account.verificationToken,
+          verificationUrl: `http:\/\/localhost:3000/account/confirm?uid=${account.id}&token=${account.verificationToken}`
+        })
+        next()
+      } else {
+        next({message: 'Confirmation is not necessary', statusCode: 404})
+      }
+    })
+  }
+
+  Account.remoteMethod('resendConfirm', {
+    description: "Resend verification token to email",
+    accepts: [
+      { arg: 'context', type: "object", http: {source: 'context'} },
+    ],
+    returns: {
+      arg: 'result', type: 'object', root: true
+    },
+    http: { path: '/reconfirm', verb: 'GET' }
   })
-
-  //Account.afterRemoteError('confirm', (context, next) => {
-    //console.log(context)
-    //next({
-      //hola: 'mundo'
-    //})
-  //})
-
-
-
-  Account.remoteMethod(
-    'confirm2',
-    {
-      description: 'Confirm a user registration with identity verification token.',
-      accepts: [
-        //{arg: 'context', type: 'object', http: { source:'context' }},
-        {arg: 'uid', type: 'string', required: true},
-        {arg: 'token', type: 'string', required: true},
-        {arg: 'redirect', type: 'string'},
-      ],
-      returns: {arg: 'data', type: 'object'},
-      http: {verb: 'get', path: '/confirm2'},
-    }
-  );
 }

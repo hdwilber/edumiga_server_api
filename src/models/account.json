@@ -49,13 +49,13 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "confirm2"
+      "property": "find"
     },
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "find"
+      "property": "resendConfirm"
     }
   ],
   "methods": [
