@@ -32,7 +32,7 @@ export default function (Account) {
       Mailer.send({
         recipientEmail: context.instance.email,
         token: context.instance.verificationToken,
-        verificationUrl: `http:\/\/localhost:3001/api/accounts/confirm?uid=${context.instance.id}&token=${context.instance.verificationToken}`
+        verificationUrl: `http:\/\/localhost:3000/account/confirm?uid=${context.instance.id}&token=${context.instance.verificationToken}`
       })
 
       const Identity = Account.app.models.AccountIdentity
@@ -50,6 +50,7 @@ export default function (Account) {
   })
 
   Account.confirm = function (uid, token, redirect, next) {
+    console.log(next)
     Account.findById(uid, (error, account ) => {
       if (!error && account) {
         const clearToken = token.trim()
@@ -59,38 +60,69 @@ export default function (Account) {
           account.verificationToken = null
           account.save( function (error, newAccount) {
             if (!error) {
-              next()
+              //context.result = {
+                //extra: 'data'
+              //}
+              next(null, { data:1 })
             } else {
-              next(error) 
+              //context.result = {
+                //extra: 'data',
+                //result: 2,
+              //}
+              //next()
+              next(null, { data:2 })
             }
           })
         } else {
-          next(new Error('This token has been already used'))
+          //context.result = {
+            //extra: 'data',
+            //result: 3,
+          //}
+          //next()
+          next(null, { data:3 })
         }
       } else {
-        next(error)
+        //context.result = {
+          //extra: 'error',
+          //result: 10,
+        //}
+        //next()
+          next(null, { data:4 })
       }
     })
   }
 
   Account.afterRemote ('confirm', (context, instance, next) => {
-    context.result = {
-      message: 'Email verified'
-    }
+    console.log(context)
+    //console.log(context)
+    //console.log(instance)
+    //context.result = {
+      //message: 'Email verified'
+    //}
     next()
   })
 
+  //Account.afterRemoteError('confirm', (context, next) => {
+    //console.log(context)
+    //next({
+      //hola: 'mundo'
+    //})
+  //})
+
+
+
   Account.remoteMethod(
-    'confirm',
+    'confirm2',
     {
       description: 'Confirm a user registration with identity verification token.',
       accepts: [
+        //{arg: 'context', type: 'object', http: { source:'context' }},
         {arg: 'uid', type: 'string', required: true},
         {arg: 'token', type: 'string', required: true},
         {arg: 'redirect', type: 'string'},
       ],
       returns: {arg: 'data', type: 'object'},
-      http: {verb: 'get', path: '/confirm'},
+      http: {verb: 'get', path: '/confirm2'},
     }
   );
 }
