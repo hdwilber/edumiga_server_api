@@ -21,24 +21,6 @@ export default function (Institution) {
     next()
   })
 
-  Institution.beforeRemote('create', (context, instance, next) => {
-    const { accessToken } = context.req
-    Institution.findOne({where:{ 
-      accountId: accessToken.accountId, 
-      draft: true
-    }, include: ['logo', 'media', 'opportunities']}, (error, inst) => {
-      if (!error) {
-        if (inst) {
-          context.res.json(inst)
-        } else {
-          next()
-        }
-      } else {
-        next(new Error('Something went wrong'))
-      }
-    })
-  })
-
   Institution.remoteMethod('uploadLogo', {
     "description": "Uploads a single media file as logo for a Institution",
     accepts: [
