@@ -1,0 +1,51 @@
+"nro","opportunity","level","code","name","type","optional","prerequisites"
+1,119,"A",1803013,"Ingles","regular"," ","  "
+2,119,"A",2002004,"Biologia General","regular"," ","  "
+3,119,"A",2004163,"Quimica General","regular"," ","  "
+4,119,"A",2006063,"Fisica General","regular"," ","  "
+5,119,"A",2008159,"Algebra","regular"," ","  "
+6,119,"B",2002005,"Biologia Celular Y Molecular","regular"," ","2"
+7,119,"B",2002006,"Biofisica","regular"," ","2,4"
+8,119,"B",2004091,"Fisicoquimica","regular"," ","4,3"
+9,119,"B",2008160,"Calculo","regular"," ","5"
+10,119,"C",2002007,"Histologia Animal Comparada","regular"," ","6"
+11,119,"C",2002008,"Morfologia Y Anatomia Vegetal","regular"," ","6"
+12,119,"C",2002009,"Zoologia De Invertebrados","regular"," ","6"
+13,119,"C",2004092,"Quimica Organica","regular"," ","8"
+14,119,"C",2008161,"Bioestadistica","regular"," ","9"
+15,119,"D",2002010,"Embriologia Comparada","regular"," ","10"
+16,119,"D",2002011,"Sistematica De Criptogamas","regular"," ","11"
+17,119,"D",2002012,"Artropodologia","regular"," ","12"
+18,119,"D",2002013,"Geologia-Edafologia","regular"," ","8"
+19,119,"D",2002014,"Bioquimica","regular"," ","13"
+20,119,"E",2002015,"Anatomia Comparada","regular"," ","15"
+21,119,"E",2002016,"Sistematica De Fanerogamas","regular"," ","11"
+22,119,"E",2002017,"Fisiologia De Invertebrados","regular"," ","17,19"
+23,119,"E",2002018,"Bioclimatologia-Hidrologia","regular"," ","16,18"
+24,119,"E",2002019,"Genetica I","regular"," ","19,14"
+25,119,"F",2002020,"Fisiologia Vegetal","regular"," ",
+26,119,"F",2002021,"Zoologia De Vertebrados","regular"," ",
+27,119,"F",2002022,"Ecologia I","regular"," ",
+28,119,"F",2002023,"Genetica Ii","regular"," ",
+29,119,"F",2002024,"Bacteriologia","regular"," ",
+30,119,"G",2002025,"Virologia","regular"," ",
+31,119,"G",2002026,"Fisiologia De Vertebrados","regular"," ",
+32,119,"G",2002027,"Ecologia Ii","regular"," ",
+33,119,"G",2002028,"Diseños Experimentales","regular"," ",
+34,119,"G",2002037,"Etnobotanica","regular",1,
+35,119,"G",2002050,"Taxonomia Especial","regular",1,
+36,119,"G",2002053,"Sistematica De Reptiles","regular",1,
+37,119,"G",2002115,"Gestion Ambiental","regular",1,
+38,119,"H",2002029,"Limnologia","regular",1,
+39,119,"H",2002030,"Micologia I","regular"," ",
+40,119,"H",2002031,"Metodologia De La Investigacion","regular"," ",
+41,119,"H",2002032,"Evolucion","regular"," ",
+42,119,"H",2002033,"Ecologia De Comunidades Vegetales","regular",1,
+43,119,"H",2002039,"Microbiologia De Aire Y Suelo","regular",1,
+44,119,"H",2002043,"Conservacion De La Fauna Silvestre","regular",1,
+45,119,"H",2002059,"Genetica De Poblaciones","regular",1,
+46,119,"H",2002066,"Inmunoparasitologia","regular",1,
+47,119,"I",2002035,"Biogeografia","regular"," ",
+48,119,"I",2002060,"Manejo Y Conserv. De Recurs. Geneticos (ELECT","regular",1,
+49,119,"I",2016092,"Planificacion Y Evaluacion De Proyectos","regular"," ",
+50,119,"J",2002034,"Tesis","titling"," ",
