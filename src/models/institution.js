@@ -21,6 +21,37 @@ export default function (Institution) {
     next()
   })
 
+  Institution.beforeRemote('find', (context, instance, next) => {
+    const { args } = context
+    if (args.filter && args.filter.where) {
+      const { where } = args.filter
+      context.args.filter.where = {
+        ...where,
+        or: [
+          {
+            draft: false,
+          },
+          {
+            draft: { exists: false}
+          },
+        ]
+      }
+    } else {
+      context.args.filter.where = {
+        or: [{
+            draft: false
+          },
+          {
+            draft: { exists: false }
+          }]
+      }
+    }
+
+    console.log(context.args)
+    next()
+
+  })
+
   Institution.remoteMethod('uploadLogo', {
     "description": "Uploads a single media file as logo for a Institution",
     accepts: [

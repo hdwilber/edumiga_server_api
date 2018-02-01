@@ -10,6 +10,7 @@ const {
 
 export const mongodb = {
     name: "mongodb",
+    allowExtendedOperators: true,
     connector: "mongodb",
     host: DB_MONGO_HOST,
     port: DB_MONGO_PORT,
