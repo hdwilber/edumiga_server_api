@@ -26,8 +26,9 @@
     "type": {
       "type": "string"
     },
-    "draft": {
-      "type": "boolean"
+    "published": {
+      "type": "boolean",
+      "default": true
     },
     "created": {
       "type": "date"

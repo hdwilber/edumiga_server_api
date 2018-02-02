@@ -27,23 +27,11 @@ export default function (Institution) {
       const { where } = args.filter
       context.args.filter.where = {
         ...where,
-        or: [
-          {
-            draft: false,
-          },
-          {
-            draft: { exists: false}
-          },
-        ]
+        published: true,
       }
     } else {
       context.args.filter.where = {
-        or: [{
-            draft: false
-          },
-          {
-            draft: { exists: false }
-          }]
+        published: true,
       }
     }
 

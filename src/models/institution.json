@@ -40,7 +40,7 @@
     },
     "categories": [{ "type": "string" }],
     "levels": [{"type": "string"}],
-    "draft": {
+    "published": {
       "type": "boolean",
       "default": true
     },
