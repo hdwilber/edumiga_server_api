@@ -3,5 +3,6 @@ var db = conn.getDB("edumiga");
 
 db.Institution.remove({})
 db.Opportunity.remove({})
+db.Course.remove({})
 db.Prerequisite.remove({})
 

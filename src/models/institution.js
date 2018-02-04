@@ -25,19 +25,10 @@ export default function (Institution) {
     const { args } = context
     if (args.filter && args.filter.where) {
       const { where } = args.filter
-      context.args.filter.where = {
-        ...where,
-        published: true,
-      }
-    } else {
-      context.args.filter.where = {
-        published: true,
-      }
-    }
+      console.log(context.args.filter)
 
-    console.log(context.args)
+    } 
     next()
-
   })
 
   Institution.remoteMethod('uploadLogo', {

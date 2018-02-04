@@ -2,8 +2,14 @@ var conn = new Mongo();
 var db = conn.getDB("edumiga");
 
 db.Institution.find().forEach(function (inst) {
+  inst.created = Date.now()
+  inst.updated = Date.now()
+
   if (inst.levels)
     inst.levels = inst.levels.split(',');
+
+  if (!inst.published) 
+    inst.published = true
 
   if (inst.parent) {
     inst.parentId = db.Institution.findOne({nro: inst.parent })._id
@@ -16,6 +22,10 @@ db.Institution.find().forEach(function (inst) {
 })
 
 db.Opportunity.find().forEach(function (opp) {
+  opp.created = Date.now()
+  opp.updated = Date.now()
+  if(!opp.published)
+    opp.published = true
   if (opp.degrees)
     opp.degrees = opp.degrees.split(',');
   if (opp.institution) {
@@ -28,6 +38,10 @@ db.Opportunity.find().forEach(function (opp) {
 
 
 db.Course.find().forEach(function (co) {
+  co.created = Date.now()
+  co.updated = Date.now()
+  if(!co.published)
+    co.published = true
   if (co.opportunity) {
     const opp = db.Opportunity.findOne({nro: co.opportunity})
     if (opp) {
