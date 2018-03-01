@@ -29,6 +29,10 @@
       "type": "boolean",
       "default": false
     },
+    "level": {
+      "type": "number",
+      "default": 1
+    },
     "type": {
       "type": "string"
     },
