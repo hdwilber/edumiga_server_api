@@ -21,6 +21,14 @@ export default function (Institution) {
     next()
   })
 
+  function getFilter(context) {
+    const { args } = context
+    if (args.filter && args.filter.where) {
+      return args.filter.where
+    } 
+    return null
+  }
+
   Institution.beforeRemote('find', (context, instance, next) => {
     const { args } = context
     if (args.filter && args.filter.where) {
@@ -29,6 +37,19 @@ export default function (Institution) {
 
     } 
     next()
+  })
+
+  Institution.afterRemote('find', (context, instance, next) => {
+    const filter = getFilter(context)
+    Institution.count(filter, (error, count) => {
+      if (!error) {
+        context.result = {
+          count,
+          list: instance,
+        }
+        next()
+      }
+    })
   })
 
   Institution.remoteMethod('uploadLogo', {
