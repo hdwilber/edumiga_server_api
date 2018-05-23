@@ -138,4 +138,53 @@ export default function (Institution) {
       countries: Countries,
     })
   }
+
+  Institution.remoteMethod('findAllResumes', {
+    description: "Returns resume for search",
+    accepts: [
+      { arg: 'filter', type: "object", http: {source:"query"} }
+    ],
+    returns: {
+      arg: "institutions", type: "Institution", root: true
+    },
+    http: { path: '/resumes', verb: "get" }
+  })
+
+  async function countNestedOpportunities(institution) {
+    let opps = await institution.opportunities.count()
+    const deplist = await institution.dependencies.find()
+    let deps = deplist.length
+
+    const results = await Promise.all( deplist.map(dep => {
+      return countNestedOpportunities(dep)
+    }))
+    //console.log(results)
+
+    results.forEach(res => {
+      //console.log('res')
+      //console.log(res)
+      opps +=res.opportunities
+      deps +=res.dependencies
+    })
+
+    return {
+      dependencies: deps,
+      opportunities: opps,
+    }
+  }
+
+  Institution.findAllResumes = function (filter, cb) {
+    Institution.find(filter, (error, institutions) => {
+      if (!error) {
+        console.log(institutions.length)
+        institutions.forEach(inst => {
+          countNestedOpportunities(inst).then(count => {
+            console.log(inst.name + ' ' + count.opportunities)
+          })
+        })
+      } else {
+        cb(error)
+      }
+    })
+  }
 }
