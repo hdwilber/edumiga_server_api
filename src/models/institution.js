@@ -158,11 +158,8 @@ export default function (Institution) {
     const results = await Promise.all( deplist.map(dep => {
       return countNestedOpportunities(dep)
     }))
-    //console.log(results)
 
     results.forEach(res => {
-      //console.log('res')
-      //console.log(res)
       opps +=res.opportunities
       deps +=res.dependencies
     })
@@ -176,15 +173,30 @@ export default function (Institution) {
   Institution.findAllResumes = function (filter, cb) {
     Institution.find(filter, (error, institutions) => {
       if (!error) {
-        console.log(institutions.length)
-        institutions.forEach(inst => {
-          countNestedOpportunities(inst).then(count => {
-            console.log(inst.name + ' ' + count.opportunities)
+        const responses = Promise.all(institutions.map(inst => countNestedOpportunities(inst)))
+        responses.then( stats => {
+          const results = stats.map((stat, index) => {
+            const institution = institutions[index]
+            institution.stats = stat
+            return institution
           })
+          cb(null, results)
         })
       } else {
         cb(error)
       }
     })
   }
+  Institution.afterRemote('findAllResumes', (context, instance, next) => {
+    const filter = getFilter(context)
+    Institution.count(filter, (error, count) => {
+      if (!error) {
+        context.result = {
+          count,
+          list: instance,
+        }
+        next()
+      }
+    })
+  })
 }
