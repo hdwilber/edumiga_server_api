@@ -98,8 +98,14 @@
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW",
+      "permission": "DENY",
       "property": "*"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "types"
     },
     {
       "principalType": "ROLE",
@@ -109,13 +115,19 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "find"
     },
     {
       "principalType": "ROLE",
-      "principalId": "$unauthenticated",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findAllResumes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "findById"
     },
@@ -123,13 +135,13 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "*"
+      "property": "uploadLogo"
     },
     {
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "uploadMedia"
+      "property": "patchAttributes"
     }
   ],
   "methods": {}

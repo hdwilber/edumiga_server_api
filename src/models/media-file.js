@@ -168,10 +168,9 @@ export default function (MediaFile) {
   MediaFile.upload = (context, options, cb) => {
     const Container = MediaFile.app.models.Container;
     const { accessToken } = context.req
-    const folder = `${LOCAL_STORAGE_CONTAINER_USER}${accessToken.accountId}`
+    const { mediableId, mediableType } = options
+    const folder = `${mediableType.substring(0,3)}${mediableId}`
     
-    console.log(context.req)
-
     context.req.params.container = folder;
     options.containerPath = folder;
 
@@ -193,10 +192,10 @@ export default function (MediaFile) {
               cb(null, files)
             })
             .catch (error => {
-              cb(null, error)
+              cb(error)
             })
           } else {
-            cb(null, error);
+            cb(error);
           }
         });
       }

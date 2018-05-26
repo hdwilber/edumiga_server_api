@@ -117,5 +117,9 @@ export const AdminLevels = [
   {
     value: 'department',
     text: 'Department',
-  }
+  },
+  {
+    value: 'unit',
+    text: 'Unit',
+  },
 ]

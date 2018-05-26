@@ -30,6 +30,7 @@ export default function (Identity) {
                 cb(null, resFile[0])
               } else {
                 console.log(error)
+                cb(error)
               }
             })
           } else {
