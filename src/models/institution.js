@@ -139,6 +139,50 @@ export default function (Institution) {
     })
   }
 
+  Institution.remoteMethod('findByIdResume', {
+    description: 'Returns a resume by institution id',
+    accepts: [
+      { arg: 'id', type: 'string', required: true, },
+      { arg: 'context', type: "object", http: {source:"context"} },
+    ],
+    returns: {
+      arg: 'institution', type: 'Institution', root: true, 
+    },
+    http: { path: '/:id/resume', verb: 'get' }
+  })
+
+  async function buildResume(institution) {
+    const instLocation = institution.location 
+      ? institution.location.toObject()
+      : {}
+
+    const selfData = {
+      ...instLocation,
+      info: `${institution.prename} ${institution.name}`,
+    }
+
+    let result = [selfData]
+    if (institution.dependencies) {
+      const deplist = await institution.dependencies.find()
+      const owned = await Promise.all(deplist.map(dep => {
+        return buildResume(dep)
+      }))
+      result = result.concat(owned)
+    }
+    return result
+  }
+
+  Institution.findByIdResume = function(id, context, cb) {
+    Institution.findById(id, { include: ['dependencies'] }, (error, institution) => {
+      if (!error) {
+        buildResume(institution)
+        .then( resume => {
+          cb(null, resume)
+        })
+      }
+    })
+  }
+
   Institution.remoteMethod('findAllResumes', {
     description: "Returns resume for search",
     accepts: [

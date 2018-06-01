@@ -142,7 +142,14 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "patchAttributes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findByIdResume"
     }
+  
   ],
   "methods": {}
 }
