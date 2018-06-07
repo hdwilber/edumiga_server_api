@@ -50,6 +50,10 @@
     "dataSource": "storage_container",
     "public": true 
   },
+  "Category": {
+    "dataSource": "mongodb",
+    "public": true
+  },
   "MediaFile": {
     "dataSource": "mongodb",
     "public": true

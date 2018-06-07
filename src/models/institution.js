@@ -1,3 +1,4 @@
+import { flattenDeep } from '../lib/utils'
 import { Types, Levels, AdminLevels } from '../data/institution/constants'
 import { Countries } from '../data/countries'
 
@@ -151,34 +152,70 @@ export default function (Institution) {
     http: { path: '/:id/resume', verb: 'get' }
   })
 
-  async function buildResume(institution) {
+  function getLocation(institution) {
     const instLocation = institution.location 
       ? institution.location.toObject()
       : {}
 
-    const selfData = {
+    return {
       ...instLocation,
       info: `${institution.prename} ${institution.name}`,
     }
-
-    let result = [selfData]
-    if (institution.dependencies) {
-      const deplist = await institution.dependencies.find()
-      const owned = await Promise.all(deplist.map(dep => {
-        return buildResume(dep)
-      }))
-      result = result.concat(owned)
-    }
-    return result
   }
 
+  async function buildResume(institution) {
+    const deplist = await institution.dependencies.find()
+    const oppcount = await institution.opportunities.count()
+    const categories = await institution.categories.find()
+    const data = {
+      location: getLocation(institution),
+      categories, 
+      opportunities: oppcount,
+      dependencies: {
+      }
+    }
+        
+    const partials = Promise.all(deplist.map( dep => {
+      const currentCount = data.dependencies[dep.adminLevel] || 0
+      data.dependencies[dep.adminLevel] = currentCount +1
+      return buildResume(dep)
+    }))
+
+    if (!deplist.length)
+      return data
+
+    return flattenDeep(await partials).concat([data])
+  }
+
+
   Institution.findByIdResume = function(id, context, cb) {
-    Institution.findById(id, { include: ['dependencies'] }, (error, institution) => {
-      if (!error) {
+    Institution.findById(id, (error, institution) => {
+      if (!error && institution) {
         buildResume(institution)
         .then( resume => {
-          cb(null, resume)
+          const result = {
+            locations: [],
+            opportunities: 0,
+            dependencies: {},
+            categories: [],
+          }
+          resume.forEach(data => {
+            result.locations.push(data.location)
+            result.categories = result.categories.concat(data.categories)
+            result.opportunities += data.opportunities
+
+            Object.keys(data.dependencies).forEach(name => {
+              const current = result.dependencies[name] || 0
+              result.dependencies[name] = current + data.dependencies[name]
+            })
+          })
+          cb(null, result)
         })
+        .catch(error => {
+          cb(error)
+        })
+      } else {
+        cb(error)
       }
     })
   }
