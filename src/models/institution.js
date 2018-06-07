@@ -187,31 +187,43 @@ export default function (Institution) {
     return flattenDeep(await partials).concat([data])
   }
 
+  const getDependencies = (deps) => {
+    const dependencies = {}
+    Object.keys(deps).forEach(name => {
+      const current = dependencies[name] || 0
+      dependencies[name] = current + dependencies[name]
+    })
+    return dependencies
+  }
 
   Institution.findByIdResume = function(id, context, cb) {
     Institution.findById(id, (error, institution) => {
       if (!error && institution) {
         buildResume(institution)
         .then( resume => {
-          const result = {
+          let result = {
             locations: [],
             opportunities: 0,
             dependencies: {},
             categories: [],
           }
-          resume.forEach(data => {
-            result.locations.push(data.location)
-            result.categories = result.categories.concat(data.categories)
-            result.opportunities += data.opportunities
+          if (Array.isArray(resume)) {
+            resume.forEach(data => {
+              result.locations.push(data.location)
+              result.categories = result.categories.concat(data.categories)
+              result.opportunities += data.opportunities
 
-            Object.keys(data.dependencies).forEach(name => {
-              const current = result.dependencies[name] || 0
-              result.dependencies[name] = current + data.dependencies[name]
+              result.dependencies = getDependencies(data.dependencies)
+
             })
-          })
+          } else {
+            result = resume
+            result.dependencies = getDependencies(resume.dependencies)
+          }
           cb(null, result)
         })
         .catch(error => {
+          console.log(error)
           cb(error)
         })
       } else {
