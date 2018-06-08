@@ -191,7 +191,7 @@ export default function (Institution) {
     const dependencies = {}
     Object.keys(deps).forEach(name => {
       const current = dependencies[name] || 0
-      dependencies[name] = current + dependencies[name]
+      dependencies[name] = current + deps[name]
     })
     return dependencies
   }
