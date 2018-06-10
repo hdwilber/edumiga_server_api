@@ -23,6 +23,9 @@
     "startedFrom": {
       "type": "Date"
     },
+    "degrees": [{
+      "type": "String"
+    }],
     "type": {
       "type": "string"
     },

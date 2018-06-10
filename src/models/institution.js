@@ -1,3 +1,4 @@
+import { flattenDeep } from '../lib/utils'
 import { Types, Levels, AdminLevels } from '../data/institution/constants'
 import { Countries } from '../data/countries'
 
@@ -139,10 +140,72 @@ export default function (Institution) {
     })
   }
 
+  Institution.remoteMethod('findByIdResume', {
+    description: 'Returns a resume by institution id',
+    accepts: [
+      { arg: 'id', type: 'string', required: true, },
+      { arg: 'context', type: "object", http: {source:"context"} },
+    ],
+    returns: {
+      arg: 'institution', type: 'Institution', root: true, 
+    },
+    http: { path: '/:id/resume', verb: 'get' }
+  })
+
+  function getLocation(institution) {
+    const instLocation = institution.location 
+      ? institution.location.toObject()
+      : {}
+
+    return {
+      ...instLocation,
+      info: `${institution.prename} ${institution.name}`,
+    }
+  }
+
+  async function getResume(institution, main = true) {
+    const deplist = await institution.dependencies.find()
+    const opplist = await institution.opportunities.find()
+    const categories = await institution.categories.find()
+    const data = {
+      institution: institution.toObject(),
+      categories, 
+      opportunities: opplist,
+      main,
+    }
+        
+    const partials = Promise.all(deplist.map( dep => getResume(dep, false)))
+
+    if (!deplist.length)
+      return data
+
+    return flattenDeep(await partials).concat([data])
+  }
+
+  Institution.findByIdResume = function(id, context, cb) {
+    Institution.findById(id, (error, institution) => {
+      if (!error && institution) {
+        getResume(institution)
+        .then( resume => {
+          const result = {
+            ...institution.toObject(),
+            resume: buildResume(resume),
+          }
+          cb(null, result)
+        })
+        .catch(error => {
+          console.log(error)
+          cb(error)
+        })
+      } else {
+        cb(error)
+      }
+    })
+  }
+
   Institution.remoteMethod('findAllResumes', {
     description: "Returns resume for search",
     accepts: [
-      { arg: 'filter', type: "object", http: {source:"query"} }
     ],
     returns: {
       arg: "institutions", type: "Institution", root: true
@@ -150,53 +213,72 @@ export default function (Institution) {
     http: { path: '/resumes', verb: "get" }
   })
 
-  async function countNestedOpportunities(institution) {
-    let opps = await institution.opportunities.count()
-    const deplist = await institution.dependencies.find()
-    let deps = deplist.length
+  Institution.remoteMethod('findAllOwned', {
+    description: "Returns resume for search",
+    accepts: [
+      { arg: 'context', type: "object", http: {source:'context'} },
+    ],
+    returns: {
+      arg: "institutions", type: "Institution", root: true
+    },
+    http: { path: '/owned', verb: "get" }
+  })
 
-    const results = await Promise.all( deplist.map(dep => {
-      return countNestedOpportunities(dep)
-    }))
+  function buildResume(flatted) {
+    const dependencies = []
+    let opportunities = []
+    const stats = {
+      categories: [],
+      opportunities: 0,
+      dependencies: {},
+    }
+    if (Array.isArray(flatted)) {
+      flatted.forEach(data => {
+        if (!data.main) {
+          dependencies.push(data.institution)
+          const name = data.institution.adminLevel
+          const current = stats.dependencies[name] || 0
+          stats.dependencies[name] = current +1
+        }
+        opportunities = opportunities.concat(data.opportunities)
+        stats.categories = stats.categories.concat(data.categories)
+        stats.opportunities += data.opportunities.length
 
-    results.forEach(res => {
-      opps +=res.opportunities
-      deps +=res.dependencies
-    })
-
+      })
+    } else {
+      opportunities = flatted.opportunities
+      stats.opportunities = flatted.opportunities.length
+    }
     return {
-      dependencies: deps,
-      opportunities: opps,
+      dependencies,
+      opportunities,
+      stats,
     }
   }
 
-  Institution.findAllResumes = function (filter, cb) {
-    Institution.find(filter, (error, institutions) => {
-      if (!error) {
-        const responses = Promise.all(institutions.map(inst => countNestedOpportunities(inst)))
-        responses.then( stats => {
-          const results = stats.map((stat, index) => {
-            const institution = institutions[index]
-            institution.stats = stat
-            return institution
-          })
-          cb(null, results)
-        })
-      } else {
-        cb(error)
+  async function generateResume(filter) {
+    const institutions = await Institution.find(filter)
+    const resumes = await Promise.all(institutions.map(institution => getResume(institution)))
+    const result = resumes.map((resume, index) => {
+      return {
+        ...institutions[index].toObject(),
+        resume: buildResume(resume),
       }
     })
+    return {
+      count: institutions.length,
+      list: result
+    }
   }
-  Institution.afterRemote('findAllResumes', (context, instance, next) => {
-    const filter = getFilter(context)
-    Institution.count(filter, (error, count) => {
-      if (!error) {
-        context.result = {
-          count,
-          list: instance,
-        }
-        next()
-      }
-    })
-  })
+
+  Institution.findAllOwned = async function (context) {
+    const { accountId } = context.req.accessToken
+    const filter = { where: { adminLevel: 'main', accountId, }}
+    return await generateResume(filter)
+  }
+
+  Institution.findAllResumes = async function () {
+    const filter = { where: { adminLevel: 'main' }}
+    return await generateResume(filter)
+  }
 }

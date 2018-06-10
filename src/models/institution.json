@@ -35,7 +35,7 @@
       },
       "zoom": {
         "type": "number",
-        "default": 10
+        "default": null
       }
     },
     "categories": [{ "type": "string" }],
@@ -59,6 +59,10 @@
       "type": "belongsTo",
       "model": "Account",
       "foreignKey": "accountId"
+    },
+    "categories": {
+      "type": "hasAndBelongsToMany",
+      "model": "Category"
     },
     "locations": {
       "type": "hasMany",
@@ -133,6 +137,12 @@
     },
     {
       "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "findAllOwned"
+    },
+    {
+      "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "uploadLogo"
@@ -142,7 +152,14 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "patchAttributes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findByIdResume"
     }
+  
   ],
   "methods": {}
 }

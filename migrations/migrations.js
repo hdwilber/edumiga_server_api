@@ -1,23 +1,42 @@
-var conn = new Mongo();
-var db = conn.getDB("edumiga");
+const conn = new Mongo();
+const edumigaDb = conn.getDB("edumiga");
 
-const user = db.Account.insertOne({
+const user = edumigaDb.Account.insertOne({
   email: 'dev@edumiga.com',
   password: '$2a$10$U2wF4SLHmNmRMk6vc4sU5utDWcC1M4kprewoy3cAatUZQ5UCxQfnG',
   created: Date.now(),
   updated: Date.now(),
 })
 
-const identity = db.AccountIdentity.insertOne({
+const identity = edumigaDb.AccountIdentity.insertOne({
   accountId: user.insertedId,
 })
 
-print(user.insertedId)
 
-db.Institution.find().forEach(function (inst) {
-  inst.created = Date.now()
-  inst.updated = Date.now()
-  inst.accountId = user.insertedId
+function setDefaults(collection, data, options = {}) {
+  const now = Date.now()
+  const { accountId, parent, nro } = options
+  const def = {
+    created: now,
+    updated: now,
+  }
+  if (options.accountId) {
+    def.accountId = accountId
+  }
+
+  if (options.parent) {
+    const par = collection.findOne({nro: data.parent})
+    def.parentId = par && par._id
+  }
+  return def
+}
+
+
+edumigaDb.Institution.find().forEach(function (inst) {
+  const defs = setDefaults(edumigaDb.Institution, inst, { 
+    accountId: user.insertedId,
+    parent: true
+  })
 
   if (inst.levels)
     inst.levels = inst.levels.split(',');
@@ -25,52 +44,47 @@ db.Institution.find().forEach(function (inst) {
   if (!inst.published) 
     inst.published = true
 
-  if (inst.parent) {
-    inst.parentId = db.Institution.findOne({nro: inst.parent })._id
-  }
   if (inst.adminLevel === "" || !inst.adminLevel) {
     inst.adminLevel = 'main'
   }
 
-  db.Institution.save(inst)
+  edumigaDb.Institution.save(Object.extend(inst, defs))
 })
 
-db.Opportunity.find().forEach(function (opp) {
-  opp.created = Date.now()
-  opp.updated = Date.now()
-  opp.accountId = user.insertedId
+edumigaDb.Opportunity.find().forEach(function (opp) {
+  const defs = setDefaults(edumigaDb.Opportunity, opp, { 
+    accountId: user.insertedId,
+  })
+
   if(!opp.published)
     opp.published = true
   if (opp.degrees)
     opp.degrees = opp.degrees.split(',');
   if (opp.institution) {
-    var inst = db.Institution.findOne({nro: opp.institution});
+    var inst = edumigaDb.Institution.findOne({nro: opp.institution});
     opp.institutionId = inst._id;
   }
-
-  db.Opportunity.save(opp);
+  edumigaDb.Opportunity.save(Object.extend(opp, defs));
 })
 
 
-db.Course.find().forEach(function (co) {
-  co.created = Date.now()
-  co.updated = Date.now()
-  co.accountId = user.insertedId
+edumigaDb.Course.find().forEach(function (co) {
+  const defs = setDefaults(edumigaDb.Course, co, { 
+    accountId: user.insertedId,
+  })
   if(!co.published)
     co.published = true
   if (co.opportunity) {
-    const opp = db.Opportunity.findOne({nro: co.opportunity})
+    const opp = edumigaDb.Opportunity.findOne({nro: co.opportunity})
     if (opp) {
       co.opportunityId = opp._id
     }
   }
   if (co.prerequisites && co.prerequisites !== ''){
-    print("Exists")
-    print(typeof(co.prerequisites))
     if (typeof(co.prerequisites) === 'number') {
-      const prereq = db.Course.findOne({nro: co.prerequisites})
+      const prereq = edumigaDb.Course.findOne({nro: co.prerequisites})
       if (prereq && prereq._id) {
-        db.Prerequisite.insert({
+        edumigaDb.Prerequisite.insert({
           courseId: co._id,
           prerequisiteId: prereq._id,
           
@@ -78,11 +92,10 @@ db.Course.find().forEach(function (co) {
       }
     } else if (typeof(co.prerequisites) === 'string') {
       const aux = co.prerequisites.split(',');
-      print("aux")
       aux.forEach(pre => {
-        const prereq = db.Course.findOne({nro: parseInt(pre)})
+        const prereq = edumigaDb.Course.findOne({nro: parseInt(pre)})
         if (prereq && prereq._id) {
-          db.Prerequisite.insert({
+          edumigaDb.Prerequisite.insert({
             courseId: co._id,
             prerequisiteId: prereq._id,
             
@@ -91,10 +104,21 @@ db.Course.find().forEach(function (co) {
       })
     }
   }
-
-
-  delete(co.prerequisites)
-
-  db.Course.save(co);
+  edumigaDb.Course.save(Object.extend(co, defs));
 })
 
+edumigaDb.Category.find().forEach(function (cat) {
+  const defs = setDefaults(edumigaDb.Category, cat, { 
+    parent: true
+  })
+  edumigaDb.Category.save(Object.extend(cat, defs))
+})
+
+//Remove fields that are not necessary anymore
+function removeFields(collection, vars = []) {
+  const target = {}
+  vars.forEach(v => target[v] = 1)
+  collection.update({}, { $unset: target }, { multi: true })
+}
+
+removeFields(edumigaDb.Category, ['nro', 'parent'])
