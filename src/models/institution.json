@@ -38,7 +38,6 @@
         "default": null
       }
     },
-    "categories": [{ "type": "string" }],
     "levels": [{"type": "string"}],
     "published": {
       "type": "boolean",
@@ -158,6 +157,12 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "findByIdResume"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__link__categories"
     }
   
   ],

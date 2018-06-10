@@ -14,9 +14,22 @@
     },
     "description": {
       "type": "string"
+    },
+    "created": {
+      "type": "date",
+      "required": true
+    },
+    "updated": {
+      "type": "date",
+      "required": true
     }
   },
   "relations": {
+    "parent": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "parentId"
+    },
     "children": {
       "type": "hasMany",
       "model": "Category",

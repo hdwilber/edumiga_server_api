@@ -14,7 +14,7 @@ const identity = edumigaDb.AccountIdentity.insertOne({
 
 
 function setDefaults(collection, data, options = {}) {
-  const now = Date.now()
+  const now = new Date()
   const { accountId, parent, nro } = options
   const def = {
     created: now,
