@@ -1,10 +1,10 @@
-var conn = new Mongo();
-var db = conn.getDB("edumiga");
+const conn = new Mongo();
+const edumigaDb = conn.getDB("edumiga");
 
-db.Account.remove({})
-db.AccountIdentity.remove({})
-db.Institution.remove({})
-db.Opportunity.remove({})
-db.Course.remove({})
-db.Prerequisite.remove({})
-
+edumigaDb.Account.remove({})
+edumigaDb.AccountIdentity.remove({})
+edumigaDb.Institution.remove({})
+edumigaDb.Opportunity.remove({})
+edumigaDb.Course.remove({})
+edumigaDb.Prerequisite.remove({})
+edumigaDb.Category.remove({})
