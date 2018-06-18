@@ -23,7 +23,7 @@
     "state": "string",
     "province": "string",
     "county": "string",
-    "phone": "string",
+    "phones": ["string"],
     "adminLevel": {
       "type": "string",
       "default": "main"

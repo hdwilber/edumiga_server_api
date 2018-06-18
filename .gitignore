@@ -20,5 +20,6 @@ npm-debug.log
 
 .env
 build
+/src/client
 
 providers.json
