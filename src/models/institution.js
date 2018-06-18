@@ -183,7 +183,7 @@ export default function (Institution) {
   }
 
   Institution.findByIdResume = function(id, context, cb) {
-    Institution.findById(id, (error, institution) => {
+    Institution.findById(id, { include: ['logo'] }, (error, institution) => {
       if (!error && institution) {
         getResume(institution)
         .then( resume => {
@@ -274,11 +274,15 @@ export default function (Institution) {
   Institution.findAllOwned = async function (context) {
     const { accountId } = context.req.accessToken
     const filter = { where: { adminLevel: 'main', accountId, }}
-    return await generateResume(filter)
+    const owned = await Institution.find(filter)
+    return {
+      list: owned,
+    }
+    //return await generateResume(filter)
   }
 
   Institution.findAllResumes = async function () {
-    const filter = { where: { adminLevel: 'main' }}
+    const filter = { where: { adminLevel: 'main' }, include: ['logo']}
     return await generateResume(filter)
   }
 }
