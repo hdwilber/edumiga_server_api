@@ -16,6 +16,10 @@
       "type": "number",
       "default": null
     },
+    "durationUnit": {
+      "type": "number",
+      "default": null
+    },
     "regime": {
       "type": "string",
       "default": "yearly"

@@ -1,5 +1,6 @@
 import { Countries } from '../data/countries'
 import { Categories } from '../data/categories'
+import { TimeUnits } from '../data/time'
 
 export default function ExtraRoutes(app) {
   app.get('/api/constants', (request, response, next) => {
@@ -11,8 +12,10 @@ export default function ExtraRoutes(app) {
       filter.list.forEach(i => {
         if (i === 'countries') {
           ret[i] = Countries
-        } else if (i === 'categories'){
+        } else if (i === 'categories') {
           ret[i] = Categories
+        } else if (i === 'timeUnits') {
+          ret[i] = TimeUnits
         } else {
           ret[i] = null
         }
